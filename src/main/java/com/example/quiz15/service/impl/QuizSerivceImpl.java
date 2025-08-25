@@ -252,7 +252,12 @@ public class QuizSerivceImpl implements QuizService {
 		
 		LocalDate endDate = req.getEndDate() == null ? LocalDate.of(2999, 12, 31) //
 				: req.getEndDate();
-		List<Quiz> list=quizDao.getAll(quizName, startDate, endDate);
+		List<Quiz> list=new ArrayList<>();
+		if(req.isPublished()) {
+			list=quizDao.getAllPublished(quizName, startDate, endDate);
+		}else {
+			list=quizDao.getAll(quizName, startDate, endDate);
+		}
 		return new SearchRes(ResCodeMessage.SUCCESS.getCode(), //
 				ResCodeMessage.SUCCESS.getMessage(), list);
 		
