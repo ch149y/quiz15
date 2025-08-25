@@ -28,26 +28,32 @@ public class QuizServiceController {
 	public BasicRes create(@Valid @RequestBody QuizCreateReq req) throws Exception {
 		return quizService.create(req);
 	}
-	
+
 	@PostMapping("quiz/update")
-	public BasicRes update(@Valid @RequestBody QuizUpdateReq req) throws Exception{
+	public BasicRes update(@Valid @RequestBody QuizUpdateReq req) throws Exception {
 		return quizService.update(req);
 	}
-	
+
 	@GetMapping("quiz/getAll")
 	public SearchRes getAllQuizs() {
 		return quizService.getAllQuizs();
 	}
-	
+
 	// API 的路徑: http://localhost:8080/quiz/get_questions?quizId=1
 	// ?後面的 quizId 必須要和 @RequestParam 括號中的字串一樣
 	@PostMapping("quiz/get_questions")
 	public QuestionRes getQuizByQuizId(@RequestParam("quizId") int quizId) {
 		return quizService.getQuizByQuizId(quizId);
 	}
+
 	@PostMapping("quiz/search")
 	public SearchRes search(@RequestBody SearchReq req) {
 		return quizService.search(req);
 	}
-	
+
+	@PostMapping("quiz/delete")
+	public BasicRes delete(@RequestParam("quizId") int quizId) throws Exception {
+		return quizService.delete(quizId);
+	}
+
 }

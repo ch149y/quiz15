@@ -257,5 +257,21 @@ public class QuizSerivceImpl implements QuizService {
 				ResCodeMessage.SUCCESS.getMessage(), list);
 		
 	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public BasicRes delete(int quizId) throws Exception {
+		if(quizId<=0) {
+			return new BasicRes(ResCodeMessage.QUIZ_ID_ERROR.getCode(), ResCodeMessage.QUIZ_ID_ERROR.getMessage());
+		}
+		try {
+			quizDao.deleteById(quizId);
+			questionDao.deleteByQuizId(quizId);
+		} catch (Exception e) {
+			throw e;
+		}
+		return new BasicRes(ResCodeMessage.SUCCESS.getCode(), //
+				ResCodeMessage.SUCCESS.getMessage());
+	}
 
 }

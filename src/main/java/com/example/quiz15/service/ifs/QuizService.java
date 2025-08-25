@@ -16,4 +16,6 @@ public interface QuizService {
 	public QuestionRes getQuizByQuizId(int quizId);
 	
 	public SearchRes search(SearchReq req);
+	
+	public BasicRes delete(int quizId) throws Exception;
 }
